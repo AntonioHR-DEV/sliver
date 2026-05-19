@@ -133,17 +133,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""9710a122-ba0e-434a-ae43-68d93c620d07"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""down"",
                     ""id"": ""4ec13311-e398-4851-8b26-66a378adcbdb"",
                     ""path"": ""<Keyboard>/downArrow"",

@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: 109510256}
   - component: {fileID: 109510255}
   - component: {fileID: 109510254}
+  - component: {fileID: 109510257}
   m_Layer: 5
   m_Name: JumpButton
   m_TagString: Untagged
@@ -702,6 +703,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109510252}
   m_CullTransparentMesh: 1
+--- !u!114 &109510257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109510252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747f92f40abf574b9f6d0b639aef702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  hoverScale: 1.1
+  hoverDuration: 0.1
+  clickScale: 0.9
+  clickDuration: 0.07
 --- !u!1 &128993925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,6 +1918,7 @@ GameObject:
   - component: {fileID: 496608920}
   - component: {fileID: 496608919}
   - component: {fileID: 496608918}
+  - component: {fileID: 496608921}
   m_Layer: 5
   m_Name: MoveLeftButton
   m_TagString: Untagged
@@ -2010,6 +2028,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 496608916}
   m_CullTransparentMesh: 1
+--- !u!114 &496608921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496608916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747f92f40abf574b9f6d0b639aef702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  hoverScale: 1.1
+  hoverDuration: 0.1
+  clickScale: 0.9
+  clickDuration: 0.07
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -7545,6 +7579,7 @@ GameObject:
   - component: {fileID: 782107481}
   - component: {fileID: 782107480}
   - component: {fileID: 782107479}
+  - component: {fileID: 782107482}
   m_Layer: 5
   m_Name: MoveRightButton
   m_TagString: Untagged
@@ -7654,6 +7689,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782107477}
   m_CullTransparentMesh: 1
+--- !u!114 &782107482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782107477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747f92f40abf574b9f6d0b639aef702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  hoverScale: 1.1
+  hoverDuration: 0.1
+  clickScale: 0.9
+  clickDuration: 0.07
 --- !u!1 &802521419
 GameObject:
   m_ObjectHideFlags: 0
@@ -8087,6 +8138,7 @@ GameObject:
   - component: {fileID: 1042485991}
   - component: {fileID: 1042485990}
   - component: {fileID: 1042485989}
+  - component: {fileID: 1042485992}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -8196,6 +8248,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042485987}
   m_CullTransparentMesh: 1
+--- !u!114 &1042485992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042485987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747f92f40abf574b9f6d0b639aef702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  hoverScale: 1.1
+  hoverDuration: 0.1
+  clickScale: 0.9
+  clickDuration: 0.07
 --- !u!1 &1085745689
 GameObject:
   m_ObjectHideFlags: 0
@@ -9650,6 +9718,17 @@ MonoBehaviour:
   fastFallRebindButton: {fileID: 2004163956}
   jumpRebindButton: {fileID: 109510254}
   pauseRebindButton: {fileID: 1042485989}
+  musicVolumeText: {fileID: 971416659}
+  sfxVolumeText: {fileID: 1621773424}
+  moveLeftRebindText: {fileID: 1121496370}
+  moveRightRebindText: {fileID: 526056270}
+  fastFallRebindText: {fileID: 1365752249}
+  jumpRebindText: {fileID: 779671553}
+  pauseRebindText: {fileID: 439988716}
+  normalTexColor: {r: 0, g: 0, b: 0, a: 1}
+  normalButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  activeTextColor: {r: 1, g: 1, b: 1, a: 1}
+  activeButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1496395079
 GameObject:
   m_ObjectHideFlags: 0
@@ -11276,6 +11355,7 @@ GameObject:
   - component: {fileID: 2004163958}
   - component: {fileID: 2004163957}
   - component: {fileID: 2004163956}
+  - component: {fileID: 2004163959}
   m_Layer: 5
   m_Name: FastFallButton
   m_TagString: Untagged
@@ -11385,6 +11465,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004163954}
   m_CullTransparentMesh: 1
+--- !u!114 &2004163959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004163954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0747f92f40abf574b9f6d0b639aef702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  hoverScale: 1.1
+  hoverDuration: 0.1
+  clickScale: 0.9
+  clickDuration: 0.07
 --- !u!1 &2020363554
 GameObject:
   m_ObjectHideFlags: 0
