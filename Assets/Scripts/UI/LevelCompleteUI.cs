@@ -41,7 +41,7 @@ public class LevelCompleteUI : BasePanel
 
     private void Start()
     {
-        EndCheckpoint.OnEnded += EndCheckpoint_OnEnded;
+        EndCheckpoint.Instance.OnActivated += EndCheckpoint_OnActivated;
 
         nextLevelButton.onClick.AddListener(OnNextLevelClicked);
         retryButton.onClick.AddListener(OnRetryClicked);
@@ -64,14 +64,14 @@ public class LevelCompleteUI : BasePanel
 
     private void OnDestroy()
     {
-        EndCheckpoint.OnEnded -= EndCheckpoint_OnEnded;
+        EndCheckpoint.Instance.OnActivated -= EndCheckpoint_OnActivated;
     }
 
     // =========================================================================
     // Event Handlers
     // =========================================================================
 
-    private void EndCheckpoint_OnEnded(object sender, EventArgs e)
+    private void EndCheckpoint_OnActivated(object sender, EventArgs e)
     {
         UpdateVisual();
 

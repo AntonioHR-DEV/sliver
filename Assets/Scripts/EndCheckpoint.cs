@@ -3,12 +3,22 @@ using UnityEngine;
 
 public class EndCheckpoint : MonoBehaviour
 {
+    public static EndCheckpoint Instance { get; private set; }
     private static readonly int PRESS_TRIGGER_HASH = Animator.StringToHash("Press");
-
-    public static event EventHandler OnEnded;
+    public event EventHandler OnActivated;
 
     [SerializeField] private Animator animator;
     private bool isActivated = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +26,7 @@ public class EndCheckpoint : MonoBehaviour
         {
             isActivated = true;
             animator.SetTrigger(PRESS_TRIGGER_HASH);
-            OnEnded?.Invoke(this, EventArgs.Empty);
+            OnActivated?.Invoke(this, EventArgs.Empty);
         }
     }
 }

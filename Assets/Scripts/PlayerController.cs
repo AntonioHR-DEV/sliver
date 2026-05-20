@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     public event EventHandler OnDied;
     public event EventHandler OnRespawned;
+    public event EventHandler OnJumped;
+    public event EventHandler OnWallJumped;
+    public event EventHandler OnDoubleJumped;
 
     public enum PlayerState { Appearing, Idle, Running, Jumping, DoubleJumping, Falling, WallSliding, Dead, Disappearing }
 
@@ -372,6 +375,8 @@ public class PlayerController : MonoBehaviour
             bool shouldFaceRight = wallDirection == -1;
             if (shouldFaceRight != IsFacingRight) Flip();
 
+            OnWallJumped?.Invoke(this, EventArgs.Empty);
+
             return;
         }
 
@@ -381,6 +386,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpBufferCounter = 0f;
             coyoteTimeCounter = 0f;
+            OnJumped?.Invoke(this, EventArgs.Empty);
             return;
         }
 
@@ -391,6 +397,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferCounter = 0f;
             canDoubleJump = false;
             CurrentPlayerState = PlayerState.DoubleJumping;
+            OnDoubleJumped?.Invoke(this, EventArgs.Empty);
         }
     }
 

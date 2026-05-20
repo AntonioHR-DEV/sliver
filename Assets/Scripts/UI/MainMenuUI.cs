@@ -11,18 +11,13 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
 
-    // Settings panel — assign in inspector, implement later
-    [SerializeField] private GameObject settingsPanel;
-
     private void Start()
     {
         playButton.onClick.AddListener(OnPlayClicked);
         settingsButton.onClick.AddListener(OnSettingsClicked);
         quitButton.onClick.AddListener(OnQuitClicked);
 
-        // Make sure settings panel is hidden on start
-        if (settingsPanel != null)
-            settingsPanel.SetActive(false);
+        SettingsUI.Instance.SnapHidden();
     }
 
     private void OnPlayClicked()
@@ -32,8 +27,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnSettingsClicked()
     {
-        if (settingsPanel != null)
-            settingsPanel.SetActive(true);
+        SettingsUI.Instance.Show();
     }
 
     private void OnQuitClicked()

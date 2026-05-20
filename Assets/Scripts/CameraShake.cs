@@ -17,7 +17,7 @@ public class CameraShake : MonoBehaviour
     private void Start()
     {
         PlayerController.Instance.OnDied += PlayerController_OnDied;
-        StartCheckpoint.OnStarted += StartCheckpoint_OnActivated;
+        StartCheckpoint.Instance.OnActivated += StartCheckpoint_OnActivated;
     }
 
     private void StartCheckpoint_OnActivated(object sender, EventArgs e)
@@ -31,7 +31,7 @@ public class CameraShake : MonoBehaviour
         {
             PlayerController.Instance.OnDied -= PlayerController_OnDied;
         }
-        StartCheckpoint.OnStarted -= StartCheckpoint_OnActivated;
+        StartCheckpoint.Instance.OnActivated -= StartCheckpoint_OnActivated;
     }
 
     private void PlayerController_OnDied(object sender, EventArgs e)

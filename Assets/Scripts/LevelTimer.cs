@@ -44,14 +44,14 @@ public class LevelTimer : MonoBehaviour
 
     private void Start()
     {
-        StartCheckpoint.OnStarted += StartCheckpoint_OnStarted;
-        EndCheckpoint.OnEnded += EndCheckpoint_OnEnded;
+        StartCheckpoint.Instance.OnActivated += StartCheckpoint_OnActivated;
+        EndCheckpoint.Instance.OnActivated += EndCheckpoint_OnActivated;
     }
 
     private void OnDestroy()
     {
-        StartCheckpoint.OnStarted -= StartCheckpoint_OnStarted;
-        EndCheckpoint.OnEnded -= EndCheckpoint_OnEnded;
+        StartCheckpoint.Instance.OnActivated -= StartCheckpoint_OnActivated;
+        EndCheckpoint.Instance.OnActivated -= EndCheckpoint_OnActivated;
     }
 
     private void Update()
@@ -64,14 +64,14 @@ public class LevelTimer : MonoBehaviour
     // Event Handlers
     // =========================================================================
 
-    private void StartCheckpoint_OnStarted(object sender, EventArgs e)
+    private void StartCheckpoint_OnActivated(object sender, EventArgs e)
     {
         elapsedTime = 0f;
         isRunning = true;
         OnTimerStarted?.Invoke(this, EventArgs.Empty);
     }
 
-    private void EndCheckpoint_OnEnded(object sender, EventArgs e)
+    private void EndCheckpoint_OnActivated(object sender, EventArgs e)
     {
         isRunning = false;
         OnTimerStopped?.Invoke(this, EventArgs.Empty);

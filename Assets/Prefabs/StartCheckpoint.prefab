@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 3375728147008332586}
   - component: {fileID: 8791493655573866651}
   - component: {fileID: 7517493365390663473}
+  - component: {fileID: 1346295891428887797}
   m_Layer: 6
   m_Name: StartCheckpoint
   m_TagString: Untagged
@@ -207,3 +208,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartCheckpoint
   animator: {fileID: 6994074491012144234}
+--- !u!114 &1346295891428887797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882521653126664652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346ed4138ab95e2459bbb29bd4e1c16d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartCheckpointSound

@@ -5,11 +5,13 @@ using UnityEngine.UI;
 public class SettingsUI : BasePanel
 {
     public static SettingsUI Instance { get; private set; }
-    
+
     [Header("References")]
     [SerializeField] private Button closeButton;
-    [SerializeField] private Button musicVolumeButton;
-    [SerializeField] private Button sfxVolumeButton;
+    [SerializeField] private Button increaseMusicVolumeButton;
+    [SerializeField] private Button decreaseMusicVolumeButton;
+    [SerializeField] private Button increaseSfxVolumeButton;
+    [SerializeField] private Button decreaseSfxVolumeButton;
     [SerializeField] private Button moveLeftRebindButton;
     [SerializeField] private Button moveRightRebindButton;
     [SerializeField] private Button fastFallRebindButton;
@@ -32,7 +34,7 @@ public class SettingsUI : BasePanel
     [SerializeField] private Color activeButtonColor = Color.gray;
 
     private GameInput.Binding? activeRebindingBinding = null;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,7 +49,27 @@ public class SettingsUI : BasePanel
     {
         closeButton.onClick.AddListener(Hide);
 
-        // Assign listeners for all rebind operations
+        increaseMusicVolumeButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.IncreaseMusicVolume();
+            UpdateVisual();
+        });
+        decreaseMusicVolumeButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.DecreaseMusicVolume();
+            UpdateVisual();
+        });
+        increaseSfxVolumeButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.IncreaseSfxVolume();
+            UpdateVisual();
+        });
+        decreaseSfxVolumeButton.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.DecreaseSfxVolume();
+            UpdateVisual();
+        });
+
         moveLeftRebindButton.onClick.AddListener(() => StartRebindingProcess(GameInput.Binding.MoveLeft, moveLeftRebindText, moveLeftRebindButton));
         moveRightRebindButton.onClick.AddListener(() => StartRebindingProcess(GameInput.Binding.MoveRight, moveRightRebindText, moveRightRebindButton));
         fastFallRebindButton.onClick.AddListener(() => StartRebindingProcess(GameInput.Binding.FastFall, fastFallRebindText, fastFallRebindButton));
@@ -90,15 +112,22 @@ public class SettingsUI : BasePanel
 
     private void UpdateVisual()
     {
-        if (GameInput.Instance == null) return;
+        if (SoundManager.Instance != null)
+        {
+            musicVolumeText.text = SoundManager.Instance.GetMusicVolumeStep().ToString();
+            sfxVolumeText.text = SoundManager.Instance.GetSfxVolumeStep().ToString();
+        }
 
-        // Fetch current key text strings
-        moveLeftRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveLeft);
-        moveRightRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveRight);
-        fastFallRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.FastFall);
-        jumpRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Jump);
-        pauseRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
+        if (GameInput.Instance != null)
+        {
+            // Fetch current key text strings
+            moveLeftRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveLeft);
+            moveRightRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.MoveRight);
+            fastFallRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.FastFall);
+            jumpRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Jump);
+            pauseRebindText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
 
+        }
         // Reset all styles/colors back to standard defaults
         ResetButtonColors(moveLeftRebindText, moveLeftRebindButton);
         ResetButtonColors(moveRightRebindText, moveRightRebindButton);
@@ -137,7 +166,7 @@ public class SettingsUI : BasePanel
         // Switch to Listening State visual cues
         rebindText.text = "Press any key...";
         rebindText.color = activeTextColor;
-        
+
         if (rebindButton.TryGetComponent(out Image btnImage))
         {
             btnImage.color = activeButtonColor;
