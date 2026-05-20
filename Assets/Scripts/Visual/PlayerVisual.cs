@@ -5,19 +5,6 @@ using System;
 /// Reads PlayerController's public state every frame and drives the Animator.
 /// No logic lives here — this is purely a translator between controller state
 /// and animation state.
-///
-/// Requires:  Animator component with an int parameter named "State"
-///
-/// Animator "State" parameter values match PlayerController.PlayerState enum:
-///   0 = Appearing
-///   1 = Idle
-///   2 = Running
-///   3 = Jumping
-///   4 = DoubleJumping
-///   5 = Falling
-///   6 = WallSliding
-///   7 = Dead
-///   8 = Disappearing
 /// </summary>
 [RequireComponent(typeof(Animator))]
 public class PlayerVisual : MonoBehaviour
@@ -26,20 +13,40 @@ public class PlayerVisual : MonoBehaviour
     private static readonly int APPEARING_STATE_HASH = Animator.StringToHash("Appearing");
     private static readonly int DISAPPEARING_STATE_HASH = Animator.StringToHash("Disappearing");
 
+    [SerializeField] private ParticleSystem dustParticleSystem;
+    [SerializeField] private int runDustEmissionRate = 20;
+    [SerializeField] private int jumpDustEmissionRate = 20;
     private Animator animator;
 
     public bool IsLocked { get; set; } = false;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); //
     }
 
     private void Start()
     {
-        if (PlayerController.Instance == null) return;
+        if (PlayerController.Instance == null) return; //
 
-        PlayerController.Instance.OnRespawned += PlayerController_OnRespawned;
+        // Explicitly subscribe using named listener methods to avoid memory leaks
+        PlayerController.Instance.OnRespawned += PlayerController_OnRespawned; //
+        PlayerController.Instance.OnJumped += PlayerController_OnDustBurstEvent;
+        PlayerController.Instance.OnWallJumped += PlayerController_OnDustBurstEvent;
+        PlayerController.Instance.OnDoubleJumped += PlayerController_OnDustBurstEvent; // Fixed: Now handles double jumps!
+        PlayerController.Instance.OnLanded += PlayerController_OnDustBurstEvent;
+    }
+
+    private void OnDestroy()
+    {
+        if (PlayerController.Instance == null) return; //
+
+        // Clean up precisely using identical references
+        PlayerController.Instance.OnRespawned -= PlayerController_OnRespawned; //
+        PlayerController.Instance.OnJumped -= PlayerController_OnDustBurstEvent;
+        PlayerController.Instance.OnWallJumped -= PlayerController_OnDustBurstEvent;
+        PlayerController.Instance.OnDoubleJumped -= PlayerController_OnDustBurstEvent;
+        PlayerController.Instance.OnLanded -= PlayerController_OnDustBurstEvent;
     }
 
     private void Update()
@@ -66,18 +73,34 @@ public class PlayerVisual : MonoBehaviour
         {
             PlayerController.Instance.gameObject.SetActive(false);
         }
+
+        // Manage continuous running dust trails
+        var emission = dustParticleSystem.emission;
+        if (PlayerController.Instance.CurrentPlayerState == PlayerController.PlayerState.Running)
+        {
+            emission.rateOverTime = runDustEmissionRate;
+        }
+        else
+        {
+            emission.rateOverTime = 0;
+        }
     }
 
-    private void OnDestroy()
-    {
-        if (PlayerController.Instance == null) return;
+    // =========================================================================
+    // Event Handlers
+    // =========================================================================
 
-        PlayerController.Instance.OnRespawned -= PlayerController_OnRespawned;
+    private void PlayerController_OnDustBurstEvent(object sender, EventArgs e)
+    {
+        if (dustParticleSystem != null)
+        {
+            dustParticleSystem.Emit(jumpDustEmissionRate);
+        }
     }
 
     private void PlayerController_OnRespawned(object sender, EventArgs e)
     {
         // Force back to Idle so the animator doesn't resume mid-death-clip
-        animator.SetInteger(STATE_PARAM_HASH, (int)PlayerController.PlayerState.Idle);
+        animator.SetInteger(STATE_PARAM_HASH, (int)PlayerController.PlayerState.Idle); //
     }
 }

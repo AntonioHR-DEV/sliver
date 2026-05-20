@@ -16,11 +16,11 @@ public class CameraShake : MonoBehaviour
 
     private void Start()
     {
-        PlayerController.Instance.OnDied += PlayerController_OnDied;
-        StartCheckpoint.Instance.OnActivated += StartCheckpoint_OnActivated;
+        PlayerController.Instance.OnDied += ShakeCamera;
+        StartCheckpoint.Instance.OnActivated += ShakeCamera;
     }
 
-    private void StartCheckpoint_OnActivated(object sender, EventArgs e)
+    private void ShakeCamera(object sender, EventArgs e)
     {
         impulseSource?.GenerateImpulse(shakeForce);
     }
@@ -29,13 +29,8 @@ public class CameraShake : MonoBehaviour
     {
         if (PlayerController.Instance != null)
         {
-            PlayerController.Instance.OnDied -= PlayerController_OnDied;
+            PlayerController.Instance.OnDied -= ShakeCamera;
         }
-        StartCheckpoint.Instance.OnActivated -= StartCheckpoint_OnActivated;
-    }
-
-    private void PlayerController_OnDied(object sender, EventArgs e)
-    {
-        impulseSource?.GenerateImpulse(shakeForce);
+        StartCheckpoint.Instance.OnActivated -= ShakeCamera;
     }
 }

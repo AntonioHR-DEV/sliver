@@ -8,6 +8,7 @@ public class EndCheckpoint : MonoBehaviour
     public event EventHandler OnActivated;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem confettiParticleSystem;
     private bool isActivated = false;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class EndCheckpoint : MonoBehaviour
         {
             isActivated = true;
             animator.SetTrigger(PRESS_TRIGGER_HASH);
+            confettiParticleSystem?.Play();
             OnActivated?.Invoke(this, EventArgs.Empty);
         }
     }

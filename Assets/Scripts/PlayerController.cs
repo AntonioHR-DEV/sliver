@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public event EventHandler OnJumped;
     public event EventHandler OnWallJumped;
     public event EventHandler OnDoubleJumped;
+    public event EventHandler OnLanded;
 
     public enum PlayerState { Appearing, Idle, Running, Jumping, DoubleJumping, Falling, WallSliding, Dead, Disappearing }
 
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private float wallCheckDistance = 0.05f;
-    
+
 
     // ── Components ────────────────────────────────────────────────────────────
 
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<BoxCollider2D>();
         originalGravityScale = rb.gravityScale;
         originalConstraints = rb.constraints;
+        CurrentPlayerState = PlayerState.Appearing;
     }
 
     private void Start()
@@ -110,7 +112,6 @@ public class PlayerController : MonoBehaviour
         GameInput.Instance.OnJumpStarted += GameInput_OnJumpStarted;
 
         transform.position = CheckpointManager.Instance.GetRespawnPosition();
-        CurrentPlayerState = PlayerState.Appearing;
     }
 
     private void Update()
@@ -135,7 +136,15 @@ public class PlayerController : MonoBehaviour
 
         moveInput = GameInput.Instance.MoveInput;
 
+        bool wasGroundedLastFrame = IsGrounded;
+
         CheckGrounded();
+        
+        if (!wasGroundedLastFrame && IsGrounded)
+        {
+            OnLanded?.Invoke(this, EventArgs.Empty);
+        }
+
         CheckWall();
         UpdateCoyoteTime();
         UpdateJumpBuffer();

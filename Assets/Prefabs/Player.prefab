@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2507821853232958388}
   - component: {fileID: 1180912743613805929}
   - component: {fileID: 9206336141190162838}
+  - component: {fileID: 4697886070044664754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,6 +140,18 @@ MonoBehaviour:
     m_Bits: 320
   groundCheckDistance: 0.05
   wallCheckDistance: 0.05
+--- !u!114 &4697886070044664754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894408884170744327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ed2d2ac98ac1546a9deb9563a82de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
 --- !u!1 &8727248589337359981
 GameObject:
   m_ObjectHideFlags: 0
