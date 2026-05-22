@@ -17,6 +17,7 @@ public class CameraShake : MonoBehaviour
     private void Start()
     {
         PlayerController.Instance.OnDied += ShakeCamera;
+        PlayerController.Instance.OnFellIntoVoid += ShakeCamera;
         StartCheckpoint.Instance.OnActivated += ShakeCamera;
     }
 
@@ -30,6 +31,7 @@ public class CameraShake : MonoBehaviour
         if (PlayerController.Instance != null)
         {
             PlayerController.Instance.OnDied -= ShakeCamera;
+            PlayerController.Instance.OnFellIntoVoid -= ShakeCamera;
         }
         StartCheckpoint.Instance.OnActivated -= ShakeCamera;
     }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public event EventHandler OnDied;
+    public event EventHandler OnFellIntoVoid;
     public event EventHandler OnRespawned;
     public event EventHandler OnJumped;
     public event EventHandler OnWallJumped;
@@ -150,7 +151,6 @@ public class PlayerController : MonoBehaviour
         UpdateJumpBuffer();
         HandleJump();
         HandleWallSlide();
-        HandleFastFall();
         HandleFlip();
 
         if (wallJumpLockTimer > 0f)
@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         if (CurrentPlayerState == PlayerState.Appearing || CurrentPlayerState == PlayerState.Disappearing || IsDead || !HasStarted || HasReachedEnd) return;
         HandleMovement();
+        HandleFastFall();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -170,7 +171,6 @@ public class PlayerController : MonoBehaviour
         if (other.TryGetComponent(out Spikes _))
         {
             HandleHazardCollision(other);
-            StartCoroutine(RespawnAfterDelay());
         }
 
         if (other.TryGetComponent(out EndCheckpoint _))
@@ -433,21 +433,31 @@ public class PlayerController : MonoBehaviour
                              * rb.gravityScale
                              * (fastFallMultiplier - 1f);
 
-        rb.linearVelocity += Vector2.down * extraGravity * Time.deltaTime;
+        rb.linearVelocity += Vector2.down * extraGravity * Time.fixedDeltaTime;
     }
 
     // =========================================================================
     // Death and Respawn
     // =========================================================================
 
-    public void Die()
+    public void Die(bool isVoidFall = false)
     {
         if (IsDead) return;
         DeathCount++;
         IsDead = true;
-        CurrentPlayerState = PlayerState.Dead;
         col.enabled = false;
-        OnDied?.Invoke(this, EventArgs.Empty);
+
+        if (!isVoidFall)
+        {
+            OnDied?.Invoke(this, EventArgs.Empty);
+            CurrentPlayerState = PlayerState.Dead;
+        }
+        else
+        {
+            OnFellIntoVoid?.Invoke(this, EventArgs.Empty);
+        }
+
+        StartCoroutine(RespawnAfterDelay());
     }
 
     public void Respawn(Vector3 position)
