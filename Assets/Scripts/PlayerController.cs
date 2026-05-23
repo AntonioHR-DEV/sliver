@@ -64,6 +64,9 @@ public class PlayerController : MonoBehaviour
     private float jumpBufferCounter;
     private bool canDoubleJump;
 
+    // ── Moving Platform ───────────────────────────────────────────────────────
+    private MovingPlatform currentPlatform;
+
     // ── Wall ──────────────────────────────────────────────────────────────────
 
     private bool isTouchingWall;
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         bool wasGroundedLastFrame = IsGrounded;
 
         CheckGrounded();
-        
+
         if (!wasGroundedLastFrame && IsGrounded)
         {
             OnLanded?.Invoke(this, EventArgs.Empty);
@@ -251,7 +254,7 @@ public class PlayerController : MonoBehaviour
         {
             CurrentPlayerState = PlayerState.Falling;
         }
-        else if (IsGrounded && Mathf.Abs(rb.linearVelocity.x) > 0.01f)
+        else if (IsGrounded && moveInput.x != 0 && Mathf.Abs(rb.linearVelocity.x) > 0.01f)
         {
             CurrentPlayerState = PlayerState.Running;
         }
@@ -279,6 +282,7 @@ public class PlayerController : MonoBehaviour
     private void CheckGrounded()
     {
         Bounds b = col.bounds;
+
         RaycastHit2D hit = Physics2D.BoxCast(
             b.center,
             new Vector2(b.size.x * 0.9f, b.size.y),
@@ -287,7 +291,17 @@ public class PlayerController : MonoBehaviour
             groundCheckDistance,
             groundLayer
         );
+
         IsGrounded = hit.collider != null;
+
+        if (IsGrounded)
+        {
+            currentPlatform = hit.collider.GetComponent<MovingPlatform>();
+        }
+        else
+        {
+            currentPlatform = null;
+        }
     }
 
     private void CheckWall()
@@ -317,14 +331,21 @@ public class PlayerController : MonoBehaviour
 
         float targetX = moveInput.x * moveSpeed;
 
+        float platformCarryX = 0f;
+        if (IsGrounded && currentPlatform != null)
+        {
+            platformCarryX = currentPlatform.DeltaMovement.x / Time.fixedDeltaTime;
+        }
+
         if (IsGrounded)
         {
-            // Instant on ground — snappy, precise
-            rb.linearVelocity = new Vector2(targetX, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(
+                targetX + platformCarryX,
+                rb.linearVelocity.y
+            );
         }
         else
         {
-            // Slight lerp in air — still responsive but physically distinct
             float smoothedX = Mathf.Lerp(rb.linearVelocity.x, targetX, airControlLerp);
             rb.linearVelocity = new Vector2(smoothedX, rb.linearVelocity.y);
         }
