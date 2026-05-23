@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private float wallCheckDistance = 0.05f;
 
@@ -294,8 +295,8 @@ public class PlayerController : MonoBehaviour
         Bounds b = col.bounds;
         Vector2 castSize = new Vector2(b.size.x, b.size.y * 0.9f);
 
-        RaycastHit2D rightHit = Physics2D.BoxCast(b.center, castSize, 0f, Vector2.right, wallCheckDistance, groundLayer);
-        RaycastHit2D leftHit = Physics2D.BoxCast(b.center, castSize, 0f, Vector2.left, wallCheckDistance, groundLayer);
+        RaycastHit2D rightHit = Physics2D.BoxCast(b.center, castSize, 0f, Vector2.right, wallCheckDistance, wallLayer);
+        RaycastHit2D leftHit = Physics2D.BoxCast(b.center, castSize, 0f, Vector2.left, wallCheckDistance, wallLayer);
 
         if (rightHit.collider != null) { isTouchingWall = true; wallDirection = 1; }
         else if (leftHit.collider != null) { isTouchingWall = true; wallDirection = -1; }

@@ -6,6 +6,7 @@ public class VoidTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerController player))
         {
+            if (player.IsDead) return;
             player.Die(isVoidFall: true);
         }
     }
