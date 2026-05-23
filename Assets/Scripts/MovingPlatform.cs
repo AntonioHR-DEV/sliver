@@ -66,4 +66,14 @@ public class MovingPlatform : MonoBehaviour
         target = (target == pointA) ? pointB : pointA;
         isPaused = false;
     }
+
+    private void OnDrawGizmos()
+    {
+        if (pointATransform == null || pointBTransform == null) return;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(pointATransform.position, 0.15f);
+        Gizmos.DrawSphere(pointBTransform.position, 0.15f);
+        Gizmos.DrawLine(pointATransform.position, pointBTransform.position);
+    }
 }
