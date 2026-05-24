@@ -59705,11 +59705,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6144217957641112421, guid: 8e451a05a39f72a448274db0183d0b5c, type: 3}
       propertyPath: goldTime
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6144217957641112421, guid: 8e451a05a39f72a448274db0183d0b5c, type: 3}
       propertyPath: silverTime
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

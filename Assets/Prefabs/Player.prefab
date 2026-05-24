@@ -125,7 +125,7 @@ MonoBehaviour:
   moveSpeed: 8
   jumpForce: 20
   wallJumpForceX: 12
-  wallJumpForceY: 17
+  wallJumpForceY: 18
   wallSlideSpeed: -2
   coyoteTime: 0.12
   jumpBufferTime: 0.1
