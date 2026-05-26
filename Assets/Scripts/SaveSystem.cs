@@ -99,10 +99,7 @@ public class SaveSystem : MonoBehaviour
             string json = JsonUtility.ToJson(saveData, prettyPrint: true);
             File.WriteAllText(SavePath, json);
             
-            // CRUCIAL FOR WEBGL: Force the browser to flush the virtual RAM cache to IndexedDB
-#if UNITY_WEBGL && !UNITY_EDITOR
             PlayerPrefs.Save();
-#endif
         }
         catch (Exception e)
         {

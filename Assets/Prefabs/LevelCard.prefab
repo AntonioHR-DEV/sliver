@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {fileID: 4113326499740625108}
   - {fileID: 1051681245800334575}
   starEarnedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  starEmptyColor: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 1}
+  starEmptyColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &7814265077232669788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

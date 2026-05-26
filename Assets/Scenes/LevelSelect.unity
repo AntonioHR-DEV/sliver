@@ -5633,7 +5633,17 @@ MonoBehaviour:
   levelCardPrefab: {fileID: 1868892447377771618, guid: 7a43a7be6a5743a4abb2444a859f7c8d, type: 3}
   gridParent: {fileID: 269661787}
   backButton: {fileID: 1845380053}
-  levelThumbnails: []
+  levelThumbnails:
+  - {fileID: 21300000, guid: d4237aa242efc7a42a58ea1a06d238de, type: 3}
+  - {fileID: 21300000, guid: 9263784b7aaba09418f91e4ae07cddc2, type: 3}
+  - {fileID: 21300000, guid: 7292ea5d18925634795760b16027f46f, type: 3}
+  - {fileID: 21300000, guid: fe4bf71c6db487848afea9476116e98e, type: 3}
+  - {fileID: 21300000, guid: a024f55266f32eb4894f53c66ef6fc28, type: 3}
+  - {fileID: 21300000, guid: c0cf134001f31c24cba201ba9de7de9a, type: 3}
+  - {fileID: 21300000, guid: 696214bf0cd99b34bbda1c45f9cae8c3, type: 3}
+  - {fileID: 21300000, guid: 3bb2f8cb8e87cf84a9500a1f65a3f992, type: 3}
+  - {fileID: 21300000, guid: 02f4c23246fd9104e94b8d77fcd294a6, type: 3}
+  - {fileID: 21300000, guid: 790c7ab4e28eb6447b9a55fe62f5b1ea, type: 3}
 --- !u!1 &1550725030
 GameObject:
   m_ObjectHideFlags: 0

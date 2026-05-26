@@ -16,8 +16,6 @@ public class MainMenuUI : MonoBehaviour
         playButton.onClick.AddListener(OnPlayClicked);
         settingsButton.onClick.AddListener(OnSettingsClicked);
         quitButton.onClick.AddListener(OnQuitClicked);
-
-        SettingsUI.Instance.SnapHidden();
     }
 
     private void OnPlayClicked()
