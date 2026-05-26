@@ -1,10 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Attach to: SceneManager GameObject in the MainMenu scene.
-/// Requires:  SceneLoader singleton present in scene.
-/// </summary>
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;

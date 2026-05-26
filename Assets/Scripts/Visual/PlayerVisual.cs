@@ -3,8 +3,6 @@ using System;
 
 /// <summary>
 /// Reads PlayerController's public state every frame and drives the Animator.
-/// No logic lives here — this is purely a translator between controller state
-/// and animation state.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 public class PlayerVisual : MonoBehaviour

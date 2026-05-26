@@ -2,16 +2,6 @@ using System;
 using System.IO;
 using UnityEngine;
 
-/// <summary>
-/// Singleton that handles all game data persistence.
-/// Saves to Application.persistentDataPath/savedata.json.
-///
-/// Usage:
-///   SaveSystem.Instance.GetLevelData(1).stars
-///   SaveSystem.Instance.SetLevelCompleted(1, 3);
-///   SaveSystem.Instance.GetSettings().musicVolume
-///   SaveSystem.Instance.SetMusicVolume(0.8f);
-/// </summary>
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem Instance { get; private set; }
@@ -22,10 +12,6 @@ public class SaveSystem : MonoBehaviour
     private string SavePath => Path.Combine(Application.persistentDataPath, SAVE_FILE_NAME);
 
     private SaveData saveData;
-
-    // =========================================================================
-    // Data Structures
-    // =========================================================================
 
     [Serializable]
     public class LevelData
@@ -51,9 +37,6 @@ public class SaveSystem : MonoBehaviour
         public SettingsData settings;
     }
 
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
 
     private void Awake()
     {
@@ -67,10 +50,6 @@ public class SaveSystem : MonoBehaviour
 
         Load();
     }
-
-    // =========================================================================
-    // Load / Save
-    // =========================================================================
 
     private void Load()
     {
@@ -98,8 +77,6 @@ public class SaveSystem : MonoBehaviour
         {
             string json = JsonUtility.ToJson(saveData, prettyPrint: true);
             File.WriteAllText(SavePath, json);
-            
-            PlayerPrefs.Save();
         }
         catch (Exception e)
         {
@@ -128,10 +105,6 @@ public class SaveSystem : MonoBehaviour
 
         Save();
     }
-
-    // =========================================================================
-    // Level Data API
-    // =========================================================================
 
     /// <summary>Returns data for a level by 1-based index.</summary>
     public LevelData GetLevelData(int levelIndex)
@@ -167,10 +140,6 @@ public class SaveSystem : MonoBehaviour
         return saveData.levels[levelIndex - 1].isUnlocked;
     }
 
-    // =========================================================================
-    // Settings API
-    // =========================================================================
-
     public SettingsData GetSettings() => saveData.settings;
 
     public void SetMusicVolume(float volume)
@@ -193,11 +162,7 @@ public class SaveSystem : MonoBehaviour
 
     public string GetBindingOverrides() => saveData.settings.bindingOverrides;
 
-    // =========================================================================
-    // Debug
-    // =========================================================================
-
-    /// <summary>Deletes the save file and resets to a fresh save. Useful for testing.</summary>
+    /// <summary>Deletes the save file and resets to a fresh save.</summary>
     [ContextMenu("Delete Save File")]
     public void DeleteSave()
     {
@@ -207,10 +172,6 @@ public class SaveSystem : MonoBehaviour
         CreateNewSave();
         Debug.Log("SaveSystem: Save file deleted and reset.");
     }
-
-    // =========================================================================
-    // Helpers
-    // =========================================================================
 
     private bool IsValidIndex(int levelIndex)
     {

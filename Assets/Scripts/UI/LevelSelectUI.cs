@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Requires:  SaveSystem singleton, SceneLoader singleton.
-///
 /// Builds the level card grid dynamically from the LevelCard prefab.
 /// Assign level thumbnails in the inspector — one sprite per level in order.
 /// </summary>
@@ -18,23 +16,14 @@ public class LevelSelectUI : MonoBehaviour
     [Tooltip("Assign one thumbnail sprite per level, in order (index 0 = Level 1).")]
     [SerializeField] private Sprite[] levelThumbnails;
 
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
-
     private void Start()
     {
         backButton.onClick.AddListener(OnBackClicked);
         BuildGrid();
     }
 
-    // =========================================================================
-    // Grid
-    // =========================================================================
-
     private void BuildGrid()
     {
-        // Clear any existing cards (useful if the screen is ever refreshed)
         foreach (Transform child in gridParent)
             Destroy(child.gameObject);
 
@@ -47,10 +36,6 @@ public class LevelSelectUI : MonoBehaviour
             card.Setup(i, thumbnail);
         }
     }
-
-    // =========================================================================
-    // Buttons
-    // =========================================================================
 
     private void OnBackClicked()
     {

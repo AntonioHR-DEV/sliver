@@ -21,17 +21,11 @@ public class GameInput : MonoBehaviour
 
     private InputActions inputActions;
     
-    // Tracks the current active rebinding process so we can cancel it externally
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
-    // -- Properties -----------------------------------------------------------
     public Vector2 MoveInput { get; private set; }
     public InputActions InputActions => inputActions;
     public bool IsRebinding => rebindingOperation != null;
-
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
 
     private void Awake()
     {

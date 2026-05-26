@@ -26,9 +26,6 @@ public class LevelCompleteUI : BasePanel
     private float elapsedBlinkTime = 0f;
     private int titleColorIndex = 0;
 
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -67,10 +64,6 @@ public class LevelCompleteUI : BasePanel
         EndCheckpoint.Instance.OnActivated -= EndCheckpoint_OnActivated;
     }
 
-    // =========================================================================
-    // Event Handlers
-    // =========================================================================
-
     private void EndCheckpoint_OnActivated(object sender, EventArgs e)
     {
         UpdateVisual();
@@ -84,10 +77,6 @@ public class LevelCompleteUI : BasePanel
             SaveSystem.Instance.SetLevelCompleted(levelIndex, LevelTimer.Instance.GetStarRating());
         }
     }
-
-    // =========================================================================
-    // Visual
-    // =========================================================================
 
     private void UpdateVisual()
     {
@@ -109,10 +98,6 @@ public class LevelCompleteUI : BasePanel
         foreach (Image starImage in starImageArray)
             starImage.color = starDeactivatedColor;
     }
-
-    // =========================================================================
-    // Buttons
-    // =========================================================================
 
     private void OnRetryClicked()
     {

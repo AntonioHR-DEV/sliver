@@ -18,19 +18,11 @@ public class LevelTimer : MonoBehaviour
     [Tooltip("Complete within this time to earn 2 stars.")]
     [SerializeField] private float silverTime = 30f;
 
-    // ── State ─────────────────────────────────────────────────────────────────
-
     private float elapsedTime;
     private bool isRunning;
 
-    // ── Public Read-Only ──────────────────────────────────────────────────────
-
     public float ElapsedTime => elapsedTime;
     public bool IsRunning => isRunning;
-
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
 
     private void Awake()
     {
@@ -60,10 +52,6 @@ public class LevelTimer : MonoBehaviour
         elapsedTime += Time.deltaTime;
     }
 
-    // =========================================================================
-    // Event Handlers
-    // =========================================================================
-
     private void StartCheckpoint_OnActivated(object sender, EventArgs e)
     {
         elapsedTime = 0f;
@@ -77,13 +65,8 @@ public class LevelTimer : MonoBehaviour
         OnTimerStopped?.Invoke(this, EventArgs.Empty);
     }
 
-    // =========================================================================
-    // Star Rating
-    // =========================================================================
-
     /// <summary>
     /// Returns 1, 2, or 3 stars based on elapsed time vs thresholds.
-    /// Call this after the timer has stopped (OnTimerStopped fired).
     /// </summary>
     public int GetStarRating()
     {
@@ -93,8 +76,7 @@ public class LevelTimer : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns elapsed time formatted as MM:SS.mm (e.g. 01:23.45).
-    /// Useful for displaying in the level complete UI.
+    /// Returns elapsed time formatted as MM:SS.mm
     /// </summary>
     public string GetFormattedTime()
     {

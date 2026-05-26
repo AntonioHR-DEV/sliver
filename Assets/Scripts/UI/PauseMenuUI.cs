@@ -20,10 +20,6 @@ public class PauseMenu : BasePanel
 
     private bool isPaused;
 
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -53,10 +49,6 @@ public class PauseMenu : BasePanel
             GameInput.Instance.OnPauseStarted -= GameInput_OnPauseStarted;
     }
 
-    // =========================================================================
-    // Input Callback
-    // =========================================================================
-
     private void GameInput_OnPauseStarted(object sender, EventArgs e)
     {
         // Don't allow pausing if the level complete screen is showing
@@ -64,10 +56,6 @@ public class PauseMenu : BasePanel
 
         TogglePause();
     }
-
-    // =========================================================================
-    // Pause / Resume
-    // =========================================================================
 
     public void TogglePause()
     {
@@ -89,10 +77,6 @@ public class PauseMenu : BasePanel
         Hide();
     }
 
-    // =========================================================================
-    // Button Handlers
-    // =========================================================================
-
     private void Restart()
     {
         SceneLoader.Instance.ReloadCurrentScene();
@@ -111,12 +95,6 @@ public class PauseMenu : BasePanel
     {
         SceneLoader.Instance.LoadScene(SceneLoader.Scene.LevelSelect);
     }
-
-    // Slide animation is provided by BasePanel
-
-    // =========================================================================
-    // Public State
-    // =========================================================================
 
     public bool IsPaused => isPaused;
 }

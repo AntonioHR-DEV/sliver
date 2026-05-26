@@ -10,22 +10,15 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    // ── Mixer ─────────────────────────────────────────────────────────────────
-
     [Header("Mixer")]
     [SerializeField] private AudioMixer audioMixer;
 
-    // Exposed parameter names — must match exactly what's in the AudioMixer
     private const string MUSIC_VOLUME_PARAM = "MusicVolume";
     private const string SFX_VOLUME_PARAM = "SfxVolume";
-
-    // ── Audio Sources ─────────────────────────────────────────────────────────
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
-
-    // ── Clips ─────────────────────────────────────────────────────────────
 
     [Header("SFX Clips")]
     [SerializeField] private AudioClip jumpNormalClip;
@@ -39,18 +32,12 @@ public class SoundManager : MonoBehaviour
     [Header("Music Clip")]
     [SerializeField] private AudioClip musicClip;
 
-    // ── Volume Settings ───────────────────────────────────────────────────────
-
     // Volume is stored as a 0-10 int step for the button-based UI
     private const int VOLUME_STEPS = 10;
     private const float VOLUME_STEP_SIZE = 1f / VOLUME_STEPS;
 
     private float musicVolume;
     private float sfxVolume;
-
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
 
     private void Awake()
     {
@@ -68,10 +55,6 @@ public class SoundManager : MonoBehaviour
         LoadVolumeSettings();
         PlayMusic(musicClip);
     }
-
-    // =========================================================================
-    // Volume
-    // =========================================================================
 
     private void LoadVolumeSettings()
     {
@@ -103,9 +86,6 @@ public class SoundManager : MonoBehaviour
         return Mathf.Log10(linear) * 20f;
     }
 
-    // ── Public Volume API ─────────────────────────────────────────────────────
-
-    /// <summary>Increments music volume by one step (call from + button).</summary>
     public void IncreaseMusicVolume()
     {
         musicVolume = Mathf.Clamp01(musicVolume + VOLUME_STEP_SIZE);
@@ -113,7 +93,6 @@ public class SoundManager : MonoBehaviour
         SaveSystem.Instance?.SetMusicVolume(musicVolume);
     }
 
-    /// <summary>Decrements music volume by one step (call from - button).</summary>
     public void DecreaseMusicVolume()
     {
         musicVolume = Mathf.Clamp01(musicVolume - VOLUME_STEP_SIZE);
@@ -121,7 +100,6 @@ public class SoundManager : MonoBehaviour
         SaveSystem.Instance?.SetMusicVolume(musicVolume);
     }
 
-    /// <summary>Increments SFX volume by one step.</summary>
     public void IncreaseSfxVolume()
     {
         sfxVolume = Mathf.Clamp01(sfxVolume + VOLUME_STEP_SIZE);
@@ -129,7 +107,6 @@ public class SoundManager : MonoBehaviour
         SaveSystem.Instance?.SetSfxVolume(sfxVolume);
     }
 
-    /// <summary>Decrements SFX volume by one step.</summary>
     public void DecreaseSfxVolume()
     {
         sfxVolume = Mathf.Clamp01(sfxVolume - VOLUME_STEP_SIZE);
@@ -143,11 +120,6 @@ public class SoundManager : MonoBehaviour
     /// <summary>Returns current SFX volume as a 0-10 int for displaying in the UI.</summary>
     public int GetSfxVolumeStep() => Mathf.RoundToInt(sfxVolume * VOLUME_STEPS);
 
-    // =========================================================================
-    // Music
-    // =========================================================================
-
-    /// <summary>Plays a music clip, looping. Replaces any currently playing music.</summary>
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null) return;
@@ -157,15 +129,10 @@ public class SoundManager : MonoBehaviour
         musicSource.Play();
     }
 
-    /// <summary>Stops the currently playing music.</summary>
     public void StopMusic()
     {
         musicSource.Stop();
     }
-
-    // =========================================================================
-    // SFX
-    // =========================================================================
 
     public void PlayJumpNormal() => PlaySFX(jumpNormalClip);
     public void PlayJumpWall() => PlaySFX(jumpWallClip);

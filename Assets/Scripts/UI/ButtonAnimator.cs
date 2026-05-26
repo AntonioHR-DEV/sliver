@@ -28,10 +28,6 @@ public class ButtonAnimator : MonoBehaviour,
         originalScale = transform.localScale;
     }
 
-    // =========================================================================
-    // Pointer Events
-    // =========================================================================
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         ScaleTo(originalScale * hoverScale, hoverDuration);
@@ -58,10 +54,6 @@ public class ButtonAnimator : MonoBehaviour,
 
         ScaleTo(isHovering ? originalScale * hoverScale : originalScale, clickDuration);
     }
-
-    // =========================================================================
-    // Scale Routine
-    // =========================================================================
 
     private void ScaleTo(Vector3 targetScale, float duration)
     {

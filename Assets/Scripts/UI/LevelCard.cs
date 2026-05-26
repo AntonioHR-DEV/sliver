@@ -23,19 +23,10 @@ public class LevelCard : MonoBehaviour
     private Button button;
     private int levelIndex;
 
-    // =========================================================================
-    // Unity Lifecycle
-    // =========================================================================
-
     private void Awake()
     {
         button = GetComponent<Button>();
     }
-
-    // =========================================================================
-    // Setup
-    // Called by LevelSelectUI when building the grid
-    // =========================================================================
 
     public void Setup(int index, Sprite thumbnail)
     {
@@ -62,10 +53,6 @@ public class LevelCard : MonoBehaviour
         }
     }
 
-    // =========================================================================
-    // Visuals
-    // =========================================================================
-
     private void UpdateStars(int earnedStars)
     {
         for (int i = 0; i < starImages.Length; i++)
@@ -77,10 +64,6 @@ public class LevelCard : MonoBehaviour
         foreach (Image star in starImages)
             star.color = starEmptyColor;
     }
-
-    // =========================================================================
-    // Click
-    // =========================================================================
 
     private void OnCardClicked()
     {

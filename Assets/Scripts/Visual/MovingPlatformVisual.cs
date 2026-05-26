@@ -42,7 +42,6 @@ public class MovingPlatformVisual : MonoBehaviour
     // =========================================================================
     // Chain
     // Spawns chain link sprites at regular intervals between pointA and pointB.
-    // Parented to scene root so they stay fixed while the platform moves.
     // =========================================================================
 
     private void SpawnChain()

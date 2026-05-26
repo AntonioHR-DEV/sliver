@@ -106,10 +106,6 @@ public class SettingsUI : BasePanel
         base.Hide();
     }
 
-    // =========================================================================
-    // Visual Updates
-    // =========================================================================
-
     private void UpdateVisual()
     {
         if (SoundManager.Instance != null)
@@ -144,10 +140,6 @@ public class SettingsUI : BasePanel
             btnImage.color = normalButtonColor;
         }
     }
-
-    // =========================================================================
-    // Rebinding Logic Handlers
-    // =========================================================================
 
     private void StartRebindingProcess(GameInput.Binding binding, TextMeshProUGUI rebindText, Button rebindButton)
     {
